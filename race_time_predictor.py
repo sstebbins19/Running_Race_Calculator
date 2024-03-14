@@ -34,6 +34,21 @@ def predict_times(dist1, time1, dist2):
         return None
 
 def predict_table(dist1, time1):
+    """
+    Produce a table of race time predictions given a time and distance of a
+    previous race.
+
+    Args:
+        dist1 (string): Distance of previous race
+                        (5km, 10km, 21.1km or 42.2km)
+        time1   (time): Time of previous race
+                        (hh:mm:ss format)
+
+    Returns:
+        dataframe: Predicted times for several race distances
+    """
     distances = ['5km', '10km', '21.1km', '42.2km']
-    df = pd.DataFrame(columns = headers)
+    times = list(map(lambda x: predict_times(dist1,time1,x), distances))
+    df = pd.DataFrame({'Distance': distances, 'Predicted Time': times})
+    return df
         
