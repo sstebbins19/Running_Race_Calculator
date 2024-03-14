@@ -51,4 +51,19 @@ def predict_table(dist1, time1):
     times = list(map(lambda x: predict_times(dist1,time1,x), distances))
     df = pd.DataFrame({'Distance': distances, 'Predicted Time': times})
     return df
-        
+
+def main():
+    try:
+        dist1 = str(input("Enter the race distance: "))
+        time1 = str(input("Enter your race time (00:00:00): "))
+
+        h,m,s = [int(i) for i in time1.split(':')]
+        result = predict_table(dist1, time(h,m,s))
+        print(result)
+
+    except ValueError:
+        print("Invalid input. Please enter string values for distance and time.")
+
+
+if __name__ == "__main__":
+    main()
